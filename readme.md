@@ -1,3 +1,47 @@
+GmailSafe v.0.1   https://github.com/vdomrachev/GmailSafe
+
+To build application use "mvn clean package". Java 11 and Maven is required.
+To use application 
+	0. https://developers.google.com/gmail/api/quickstart/java to turn on Gmail API and download credentials.json file.
+	1. run "java -jar target/gmail-safe-jar-with-dependencies.jar {path to credentials.json file}"
+	2. use GET http://localhost:8080/gmail-safe/backups to list backups
+	3. use POST http://localhost:8080/gmail-safe/backups to start backup. Currently backups only 10 messages from Gmail. On first run you will have to provide access to application "Quickstart" in Google account.
+	4. While backup is running you can check status by get calling GET http://localhost:8080/gmail-safe/backups
+	[
+		{
+			"backupId": "868f2021-a5bc-47bd-bd1f-699af59150fd",
+			"date": "Mar 11, 2021, 9:59:21 PM",
+			"status": "IN_PROGRESS"
+		}
+	]
+	5. When backup is finished (status=OK) you can download zip content of backup by calling
+	GET http://localhost:8080/gmail-safe/export/{backupId}
+	Thats a data.zip file with one backup.json file in it representing Backup object json content.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 GET http://localhost:8080/gmail-safe/backups
 POST http://localhost:8080/gmail-safe/backups
 

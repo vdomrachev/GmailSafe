@@ -6,17 +6,17 @@ import java.util.Set;
 
 import com.google.api.services.gmail.model.Message;
 
-public class Backup {
-	public enum Status { IN_PROGRESS, OK, FAILED }
+public class BackupView {
 	String backupId;
 	Date date;
-	Status status;
-	transient Set<Message> messages = new HashSet<>();
-	public Backup(String backupId, Date date, Status status) {
+	Backup.Status status;
+	Set<Message> messages = new HashSet<>();
+	public BackupView(String backupId, Date date, Backup.Status status, Set<Message> messages) {
 		super();
 		this.backupId = backupId;
 		this.date = date;
 		this.status = status;
+		this.messages = messages;
 	}
 	public String getBackupId() {
 		return backupId;
@@ -24,10 +24,10 @@ public class Backup {
 	public Date getDate() {
 		return date;
 	}
-	public Status getStatus() {
+	public Backup.Status getStatus() {
 		return status;
 	}
-	public void setStatus(Status status) {
+	public void setStatus(Backup.Status status) {
 		this.status = status;
 	}
 	public Set<Message> getMessages() {
