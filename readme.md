@@ -35,3 +35,10 @@ code=4/0AY0e-g7WgPgSS591cVhx8L-53kKEoQm6f7-UfncZaDQqiv6viacWWX-fZ4a6-bgXxPNeIw#&
     "scope": "https://www.googleapis.com/auth/gmail.readonly",
     "token_type": "Bearer"
 }
+
+
+https://developers.google.com/gmail/api/quickstart/java
+It was the first web page that i walked through and used that code in GmailQuickstart class in my project .
+But i was a little bit confused by using com.google.oauth-client:google-oauth-client-jetty with google-api-client and google-api-services-gmail because of non-functional requirement "The application’s source code does NOT depend on .... except... a Gmail client library" and already not using application server for app deployment (some misunderstood).
+So i found example (as i see more complicated) where google-auth-library-oauth2-http was used (not using jetty).
+Now i tried with https://developers.google.com/gmail/api/quickstart/java and it works out of the box nicely. Will continue with a project in the evening after my work.
