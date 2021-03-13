@@ -6,10 +6,12 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.dvv.gmailSafe.InjectByType;
+import com.dvv.gmailSafe.Singleton;
 import com.dvv.gmailSafe.entities.Backup;
 import com.dvv.gmailSafe.entities.BackupView;
 import com.dvv.gmailSafe.google.GmailController;
 
+@Singleton
 public class BackupController {
 	
 	private Map<String, Backup> backups = new ConcurrentHashMap<String, Backup>();

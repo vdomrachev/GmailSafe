@@ -6,9 +6,6 @@ import lombok.Setter;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author Evgeny Borisov
- */
 public class ApplicationContext {
     @Setter
     private ObjectFactory factory;

@@ -17,7 +17,6 @@ public class Main {
 		ApplicationContext context = Application.run("com.dvv", propertiesFilePath, 
 				new HashMap<>());
 		
-		// new HashMap<>(Map.of(StringResultWriter.class, StringResultWriterMock.class)) for unit tests mock
 		GmailSafeHttpServer httpServer = context.getObject(GmailSafeHttpServer.class);
 		httpServer.start();
 	}

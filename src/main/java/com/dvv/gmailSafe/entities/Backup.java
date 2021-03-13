@@ -6,7 +6,6 @@ import java.util.Set;
 
 import com.google.api.services.gmail.model.Message;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
