@@ -1,4 +1,4 @@
-# GmailSafe v.0.1   
+# GmailSafe v.0.2  
 
 https://github.com/vdomrachev/GmailSafe
 
@@ -23,5 +23,9 @@ Response example:
 
 When backup is finished (status=OK) you can download zip content of backup by calling
 GET http://localhost:8080/gmail-safe/export/{backupId}
+Service returns data.zip file with one backup.json file in it representing Backup object json content with list of Gmail messages.
 
+Return all emails with the specified label in a specified backup, in a compressed archive
+GET http://localhost:8080/gmail-safe/export/{backupId}/{label}
+For example GET http://localhost:8080/gmail-safe/export/90c761b6-bb90-4058-8922-fb0000c8aaf5/SENT
 Service returns data.zip file with one backup.json file in it representing Backup object json content with list of Gmail messages.
