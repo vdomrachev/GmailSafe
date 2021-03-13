@@ -2,14 +2,17 @@ package com.dvv.gmailSafe.controller.backup;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import com.dvv.gmailSafe.InjectByType;
 import com.dvv.gmailSafe.Singleton;
 import com.dvv.gmailSafe.entities.Backup;
 import com.dvv.gmailSafe.entities.BackupView;
 import com.dvv.gmailSafe.google.GmailController;
+import com.google.api.services.gmail.model.Message;
 
 @Singleton
 public class BackupController {
@@ -53,6 +56,15 @@ public class BackupController {
 		Backup backup = backups.get(id);
 		if (backup != null && Backup.Status.OK.equals(backup.getStatus())) {
 			return new BackupView(backup.getBackupId(), backup.getDate(), backup.getStatus(), backup.getMessages());
+		}
+		return null;
+	}
+
+	public BackupView getByLabel(String id, String label) {
+		Backup backup = backups.get(id);
+		if (backup != null && Backup.Status.OK.equals(backup.getStatus())) {
+			Set<Message> messagesByFilter = backup.getMessages().stream().filter(x -> x.getLabelIds().contains(label)).collect(Collectors.toSet());
+			return new BackupView(backup.getBackupId(), backup.getDate(), backup.getStatus(), messagesByFilter);
 		}
 		return null;
 	}

@@ -13,6 +13,7 @@ public class RequestRouteController {
 	@InjectByType
 	private BackupController controller;
 	
+	//TODO refactor
 	public Object process(String requestMethod, String path) {
 		Object response = null;
 		switch (requestMethod) {
@@ -24,6 +25,16 @@ public class RequestRouteController {
         		}
         		
         		if (path!=null && path.startsWith(EXPORT)) {
+        			int secondSlashIndex = path.indexOf('/', EXPORT.length());
+        			if (secondSlashIndex > 0) {
+            			String id = path.substring(path.indexOf(EXPORT) + EXPORT.length(), path.indexOf('/', EXPORT.length()));
+            			String label = path.substring(secondSlashIndex + 1);
+            			if (id != null && !id.isBlank() && label != null && !label.isBlank()) {
+            				response = controller.getByLabel(id, label);
+            			}
+        				break;
+        			}
+        			
         			String id = path.substring(path.indexOf(EXPORT) + EXPORT.length());
         			if (id != null && !id.isBlank()) {
         				response = controller.get(id);
