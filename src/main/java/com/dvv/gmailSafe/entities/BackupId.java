@@ -1,14 +1,10 @@
 package com.dvv.gmailSafe.entities;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+@Data
+@RequiredArgsConstructor
 public class BackupId {
-	private String backupId;
-
-	public BackupId(String backupId) {
-		super();
-		this.backupId = backupId;
-	}
-
-	public String getBackupId() {
-		return backupId;
-	}
+	private final String backupId;
 }

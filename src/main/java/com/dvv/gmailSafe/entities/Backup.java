@@ -6,31 +6,16 @@ import java.util.Set;
 
 import com.google.api.services.gmail.model.Message;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+@Data
+@RequiredArgsConstructor
 public class Backup {
 	public enum Status { IN_PROGRESS, OK, FAILED }
-	String backupId;
-	Date date;
+	final String backupId;
+	final Date date;
 	Status status;
 	transient Set<Message> messages = new HashSet<>();
-	public Backup(String backupId, Date date, Status status) {
-		super();
-		this.backupId = backupId;
-		this.date = date;
-		this.status = status;
-	}
-	public String getBackupId() {
-		return backupId;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public Status getStatus() {
-		return status;
-	}
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-	public Set<Message> getMessages() {
-		return messages;
-	}
 }

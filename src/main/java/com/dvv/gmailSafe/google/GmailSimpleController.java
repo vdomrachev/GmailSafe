@@ -1,5 +1,6 @@
 package com.dvv.gmailSafe.google;
 
+import com.dvv.gmailSafe.InjectProperty;
 import com.dvv.gmailSafe.entities.Backup;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -26,13 +27,12 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum GmailSimpleController {
-	INSTANCE;
+public class GmailSimpleController implements GmailController {
 	
     private static final String APPLICATION_NAME = "GmailSafe";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
-    private static final int LIMIT = 10;
+    private static final long LIMIT = 10l;
     
     /**
      * Global instance of the scopes required by this quickstart.
@@ -40,12 +40,8 @@ public enum GmailSimpleController {
      */
     private static final List<String> SCOPES = List.of(GmailScopes.GMAIL_READONLY, GmailScopes.GMAIL_LABELS);
 
+    @InjectProperty("credentialsFilePath")
 	private String credentialsFilePath;
-
-	public void setCredentialsFilePath(String credentialsFilePath) {
-		this.credentialsFilePath = credentialsFilePath;
-	}
-    
 
     /**
      * Creates an authorized Credential object.
@@ -72,6 +68,7 @@ public enum GmailSimpleController {
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 
+	@Override
     public boolean load(Backup backup) throws IOException, GeneralSecurityException {
     	
     	final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
@@ -79,7 +76,7 @@ public enum GmailSimpleController {
                 .setApplicationName(APPLICATION_NAME)
                 .build();
 
-    	ListMessagesResponse response = service.users().messages().list("me").execute();
+    	ListMessagesResponse response = service.users().messages().list("me").setMaxResults(LIMIT).execute();
 
     	List<Message> messages = new ArrayList<Message>();
         while (response.getMessages() != null && messages.size() < LIMIT) {
